@@ -1,0 +1,22 @@
+.login {
+  display: grid;
+  height: 100%;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.redirect {
+  margin-top: 20px;
+  display: grid;
+  row-gap: 5px;
+  justify-items: center;
+}
+
+.redirect p {
+  font-size: 14px;
+}

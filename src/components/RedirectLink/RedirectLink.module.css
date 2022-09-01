@@ -1,0 +1,24 @@
+.link {
+  text-decoration: none;
+  color: #000;
+  transition: 0.2s linear;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.link svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 1px;
+  transition: 0.2s linear;
+}
+
+.link:hover {
+  transform: scale(105%);
+}
+
+.link:hover svg {
+  transform: translateX(50%);
+}
