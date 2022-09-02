@@ -42,7 +42,16 @@ const initialState: UserState = {
 const authSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (store) => {
+      store.logged = true;
+    },
+    clearUser: (store) => {
+      store.logged = false;
+      store.loading = false;
+      store.error = null;
+    },
+  },
   extraReducers: (build) => {
     build
       .addCase(loginUser.pending, (store) => {
@@ -64,5 +73,7 @@ const authSlice = createSlice({
       });
   },
 });
+
+export const { clearUser, setUser } = authSlice.actions;
 
 export default authSlice.reducer;

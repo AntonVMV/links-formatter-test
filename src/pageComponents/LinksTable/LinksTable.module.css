@@ -1,0 +1,60 @@
+.links_table {
+  display: grid;
+  border-collapse: collapse;
+  min-width: 100%;
+  grid-template-columns:
+    minmax(50px, 0.5fr)
+    minmax(150px, 5fr)
+    minmax(60px, 1fr)
+    minmax(60px, 1fr);
+  background-color: white;
+  color: #808080;
+}
+
+td,
+th {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  padding: 25px 5px;
+}
+
+thead,
+tbody,
+.links_element {
+  display: contents;
+}
+
+.links_element th {
+  position: sticky;
+  top: 0;
+  background-color: rgb(94, 110, 255);
+  font-size: 18px;
+  font-weight: normal;
+  color: white;
+}
+
+.links_element:nth-child(even) td {
+  background: #f8f6ff;
+}
+
+.links_element td:not(:nth-child(2)) {
+  text-align: center;
+}
+
+.short_link {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #808080;
+  cursor: pointer;
+  transition: 0.2s linear;
+}
+
+.link:hover {
+  color: black;
+}

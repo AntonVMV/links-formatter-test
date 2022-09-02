@@ -1,0 +1,19 @@
+.main_page {
+  padding: 20px 0;
+  display: grid;
+  row-gap: 20px;
+}
+
+.logout_btn {
+  background: rgb(185, 59, 59);
+  text-transform: uppercase;
+  justify-self: flex-end;
+}
+
+.logout_btn:hover {
+  background: rgb(170, 49, 49);
+}
+
+.logout_btn:active {
+  box-shadow: none;
+}

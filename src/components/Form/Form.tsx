@@ -1,6 +1,7 @@
+import React, { DetailedHTMLProps, FormHTMLAttributes, useState } from "react";
 import { ReactComponent as PassHidden } from "./passoff.svg";
 import { ReactComponent as PassVisible } from "./passon.svg";
-import React, { DetailedHTMLProps, FormHTMLAttributes, useState } from "react";
+import { ReactComponent as UserIcon } from "./userIcon.svg";
 import { Input } from "../Input/Input";
 import { Button } from "../Button/Button";
 import { IForm } from "../../types";
@@ -28,6 +29,7 @@ export const Form: React.FC<FormProps> = ({ submit }) => {
 
   return (
     <form className={styles.form} onSubmit={submitHandler} autoComplete="off">
+      <UserIcon />
       <label className={styles.label}>
         Username:
         <Input

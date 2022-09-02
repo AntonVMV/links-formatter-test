@@ -1,0 +1,13 @@
+.create_field {
+  display: grid;
+  row-gap: 10px;
+}
+
+.input {
+  background-color: white;
+  max-width: 50vw;
+}
+
+.button {
+  justify-self: flex-start;
+}

@@ -9,6 +9,12 @@
   background-color: white;
 }
 
+.form > svg {
+  width: 100px;
+  height: 100px;
+  fill: rgb(70, 70, 70);
+}
+
 .label {
   font-size: 18px;
   width: 100%;
