@@ -1,19 +1,19 @@
 import { ILinkData } from "../../types";
-import { Modal } from "../../components/Modal/Modal";
 import styles from "./LinksTable.module.css";
-import { useState } from "react";
+import { useAppDispatch } from "../../hooks/storeHooks";
+import { setModal } from "../../store/slices/modalSlice";
 
 interface LinksTableProps {
   data: ILinkData[];
 }
 
 export const LinksTable: React.FC<LinksTableProps> = ({ data }) => {
-  const [isModal, setModal] = useState<string>("");
+  const dispatch = useAppDispatch();
 
   const copyToClipboard = (e: React.MouseEvent<HTMLParagraphElement>) => {
     navigator.clipboard
       .writeText(`http://79.143.31.216/s/${e.currentTarget.innerText}`)
-      .then(() => setModal("Copied to clipboard"));
+      .then(() => dispatch(setModal("Copied to clipboard")));
   };
 
   return (
@@ -54,7 +54,6 @@ export const LinksTable: React.FC<LinksTableProps> = ({ data }) => {
             })}
         </tbody>
       </table>
-      <Modal closeHnd={() => setModal("")}>{isModal}</Modal>
     </>
   );
 };

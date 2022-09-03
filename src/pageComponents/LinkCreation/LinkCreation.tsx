@@ -3,15 +3,24 @@ import { Button } from "../../components/Button/Button";
 import { useCreateLinkMutation } from "../../store/services/links.api";
 import styles from "./LinkCreation.module.css";
 import { useState } from "react";
+import { useAppDispatch } from "../../hooks/storeHooks";
+import { setModal } from "../../store/slices/modalSlice";
+import { addNewLink } from "../../store/slices/linksSlice";
 
 export const LinkCreation = () => {
   const [link, setLink] = useState<string>("");
-  const [createLink, { data }] = useCreateLinkMutation();
+  const [createLink] = useCreateLinkMutation();
+  const dispatch = useAppDispatch();
 
-  const createLinkHandler = () => {
-    console.log(link);
-    console.log(data);
-    createLink(link);
+  const createLinkHandler = async () => {
+    try {
+      setLink("");
+      const test = await createLink(link).unwrap();
+      dispatch(addNewLink(test));
+      dispatch(setModal("Short link was created"));
+    } catch (e) {
+      dispatch(setModal("Something went wrong"));
+    }
   };
 
   return (

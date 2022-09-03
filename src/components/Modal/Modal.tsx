@@ -1,11 +1,9 @@
-import { ReactNode, useEffect } from "react";
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
+import { setModal } from "../../store/slices/modalSlice";
 import styles from "./Modal.module.css";
-
-interface ModalProps {
-  children: ReactNode;
-  closeHnd: () => void;
-}
+import ReactDOM from "react-dom";
 
 const bgMotion = {
   hidden: {
@@ -18,28 +16,36 @@ const bgMotion = {
   },
 };
 
-export const Modal: React.FC<ModalProps> = ({ children, closeHnd }) => {
+export const Modal: React.FC = () => {
+  const { modal } = useAppSelector((state) => state.modalReducer);
+  const dispatch = useAppDispatch();
+
   useEffect(() => {
-    if (!children) return;
+    if (!modal) return;
 
     setTimeout(() => {
-      closeHnd();
+      dispatch(setModal(null));
     }, 2500);
-  }, [closeHnd, children]);
+  }, [modal, dispatch]);
 
   return (
-    <AnimatePresence>
-      {!!children && (
-        <motion.div
-          className={styles.modal}
-          variants={bgMotion}
-          initial="hidden"
-          animate="visible"
-          exit="hidden"
-        >
-          {children}
-        </motion.div>
+    <>
+      {ReactDOM.createPortal(
+        <AnimatePresence mode="wait">
+          {!!modal && (
+            <motion.div
+              className={styles.modal}
+              variants={bgMotion}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              {modal}
+            </motion.div>
+          )}
+        </AnimatePresence>,
+        document.querySelector("body")!
       )}
-    </AnimatePresence>
+    </>
   );
 };

@@ -1,9 +1,10 @@
 .modal {
   position: fixed;
-  right: 20px;
-  bottom: 20px;
+  right: 50px;
+  bottom: 50px;
   padding: 40px 30px;
-  background-color: white;
+  background-color: rgb(94, 110, 255);
   border-radius: 6px;
   box-shadow: 0 4px 7px rgba(53, 53, 53, 0.2);
+  color: white;
 }

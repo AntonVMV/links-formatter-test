@@ -17,3 +17,7 @@
 .logout_btn:active {
   box-shadow: none;
 }
+
+.load_btn {
+  justify-self: center;
+}

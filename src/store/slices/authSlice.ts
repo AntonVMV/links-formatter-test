@@ -1,6 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios, { AxiosError } from "axios";
+import { isAuthError } from "../../helpers/helpers";
 import { IForm, ILoginResponse } from "../../types";
+import { setModal } from "./modalSlice";
 
 export interface UserState {
   logged: boolean;
@@ -12,7 +14,7 @@ export const loginUser = createAsyncThunk<
   ILoginResponse,
   IForm,
   { rejectValue: string }
->("user/loginUser", async (formData, { rejectWithValue }) => {
+>("user/loginUser", async (formData, { rejectWithValue, dispatch }) => {
   try {
     const { data } = await axios.post<ILoginResponse>(
       "http://79.143.31.216/login",
@@ -25,9 +27,16 @@ export const loginUser = createAsyncThunk<
 
     return data;
   } catch (e) {
-    if (e instanceof AxiosError) {
-      return rejectWithValue(e.response?.data.detail);
+    if (e instanceof AxiosError && e.response) {
+      if (isAuthError(e.response.data)) {
+        const { detail } = e.response.data;
+        dispatch(
+          setModal(typeof detail === "string" ? detail : "Unknown Error")
+        );
+      }
+      return rejectWithValue(e.response.data.detail);
     } else {
+      dispatch(setModal("Unknown error"));
       return rejectWithValue("Unknown error");
     }
   }
@@ -35,7 +44,7 @@ export const loginUser = createAsyncThunk<
 
 const initialState: UserState = {
   logged: false,
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -45,6 +54,7 @@ const authSlice = createSlice({
   reducers: {
     setUser: (store) => {
       store.logged = true;
+      store.loading = false;
     },
     clearUser: (store) => {
       store.logged = false;

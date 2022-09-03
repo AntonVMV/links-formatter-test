@@ -1,26 +1,16 @@
-import {
-  configureStore,
-  isRejectedWithValue,
-  Middleware,
-  MiddlewareAPI,
-} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { linksAppApi } from "./services/links.api";
-import { clearUser } from "./slices/authSlice";
+import { authErrorHander } from "./middlewares";
+import linkReducer from "./slices/linksSlice";
 import authReducer from "./slices/authSlice";
-
-export const authErrorHander: Middleware =
-  (api: MiddlewareAPI) => (next) => (action) => {
-    if (isRejectedWithValue(action) && action.payload.status === 401) {
-      api.dispatch(clearUser());
-    }
-
-    return next(action);
-  };
+import modalReducer from "./slices/modalSlice";
 
 const store = configureStore({
   reducer: {
-    authReducer,
     [linksAppApi.reducerPath]: linksAppApi.reducer,
+    linkReducer,
+    authReducer,
+    modalReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(linksAppApi.middleware, authErrorHander),

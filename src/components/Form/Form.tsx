@@ -25,6 +25,7 @@ export const Form: React.FC<FormProps> = ({ submit }) => {
   const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     submit(formData);
+    setFormData({ username: "", password: "" });
   };
 
   return (

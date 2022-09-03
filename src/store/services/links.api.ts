@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/dist/query/react";
-import { ILinkData } from "../../types";
+import { IForm, ILinkData } from "../../types";
 
 export const linksAppApi = createApi({
   reducerPath: "linksAppApi",
@@ -10,7 +10,6 @@ export const linksAppApi = createApi({
       const token = localStorage.getItem("links_app_token");
 
       if (token) {
-        console.log(token);
         headers.set("authorization", `Bearer ${token}`);
       }
 
@@ -19,13 +18,6 @@ export const linksAppApi = createApi({
   }),
 
   endpoints: (build) => ({
-    getLinksData: build.query<ILinkData[], void>({
-      query: () => ({
-        method: "GET",
-        url: "/statistics",
-      }),
-      providesTags: ["links"],
-    }),
     createLink: build.mutation<ILinkData, string>({
       query: (data) => ({
         method: "POST",
@@ -36,9 +28,17 @@ export const linksAppApi = createApi({
       }),
       invalidatesTags: ["links"],
     }),
+
+    createUser: build.mutation<any, IForm>({
+      query: (formData) => ({
+        method: "POST",
+        url: "/register",
+        params: formData,
+      }),
+    }),
   }),
 });
 
 export const resetApi = () => linksAppApi.util.resetApiState();
 
-export const { useGetLinksDataQuery, useCreateLinkMutation } = linksAppApi;
+export const { useCreateLinkMutation, useCreateUserMutation } = linksAppApi;

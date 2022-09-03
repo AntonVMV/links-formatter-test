@@ -2,17 +2,15 @@ import { Form } from "../../components/Form/Form";
 import { RedirectLink } from "../../components/RedirectLink/RedirectLink";
 import { IForm } from "../../types";
 import { useAppDispatch, useAppSelector } from "../../hooks/storeHooks";
-import { clearUser, loginUser } from "../../store/slices/authSlice";
+import { loginUser } from "../../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { Modal } from "../../components/Modal/Modal";
+
 import styles from "./Login.module.css";
 
 export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { logged, loading, error } = useAppSelector(
-    (state) => state.authReducer
-  );
+  const { logged, loading } = useAppSelector((state) => state.authReducer);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,8 +33,6 @@ export const Login: React.FC = () => {
           <RedirectLink href="/register">Register</RedirectLink>
         </div>
       </div>
-
-      <Modal closeHnd={() => dispatch(clearUser())}>{error}</Modal>
     </>
   );
 };
