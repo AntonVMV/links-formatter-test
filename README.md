@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Основной функционал сервиса - получение по произвольной ссылке (например https://docs.docker.com/engine/reference/commandline/attach/) короткой ссылки (http://79.143.31.216/s/7ASMU), реализующей перенаправление пользователя на исходную страницу.
+Основной функционал сервиса - получение по произвольной ссылке короткой ссылки, реализующей перенаправление пользователя на исходную страницу.
 
 Проект можно посмотреть по ссылке https://links-formatter-test.vercel.app/
 
