@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Проекто можно посмотреть по ссылке https://links-formatter-test.vercel.app/
+Проект можно посмотреть по ссылке https://links-formatter-test.vercel.app/
 
 
 ВАЖНО!
