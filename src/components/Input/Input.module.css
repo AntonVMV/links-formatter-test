@@ -1,3 +1,7 @@
+.input_container {
+  position: relative;
+}
+
 .input {
   width: 100%;
   padding: 10px 20px;
@@ -7,7 +11,20 @@
   background-color: transparent;
 }
 
+.input.incorrect {
+  border-color: #d2042d;
+}
+
 .input:focus {
   outline: 2px solid rgb(94, 110, 255);
   border-color: transparent;
+}
+
+.error {
+  position: absolute;
+  left: 10px;
+  bottom: -20px;
+  font-size: 12px;
+  color: #d2042d;
+  font-weight: 500;
 }

@@ -13,6 +13,8 @@ export const LinkCreation = () => {
   const dispatch = useAppDispatch();
 
   const createLinkHandler = async () => {
+    if (!link) return;
+
     try {
       setLink("");
       const test = await createLink(link).unwrap();

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Form } from "../../components/Form/Form";
+import { Loading } from "../../components/Loading/Loading";
 import { RedirectLink } from "../../components/RedirectLink/RedirectLink";
 import { isAuthError } from "../../helpers/helpers";
 import { useAppDispatch } from "../../hooks/storeHooks";
@@ -10,7 +11,7 @@ import { IForm } from "../../types";
 import styles from "./Register.module.css";
 
 export const Register: React.FC = () => {
-  const [createUser, { data, error }] = useCreateUserMutation();
+  const [createUser, { data, error, isLoading }] = useCreateUserMutation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -38,6 +39,7 @@ export const Register: React.FC = () => {
 
   return (
     <>
+      {isLoading && <Loading />}
       <div className={styles.register}>
         <h2 className={styles.title}>Registration</h2>
         <Form submit={registerHandler} />

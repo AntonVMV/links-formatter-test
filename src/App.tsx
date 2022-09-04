@@ -7,12 +7,15 @@ import { useAppDispatch, useAppSelector } from "./hooks/storeHooks";
 import { clearUser, setUser } from "./store/slices/authSlice";
 import { ProtectedRoute } from "./pageComponents/ProtectedRoute/ProtectedRoute";
 import { useEffect } from "react";
-import { Loading } from "./components/Loading/Loading";
 
 export const App: React.FC = () => {
   const { logged, loading } = useAppSelector((state) => state.authReducer);
   const dispatch = useAppDispatch();
 
+  // Хотел сделать запрос на получение пользователя по токену, чтобы при обновлении
+  // страницы проверять валидность, но т.к. нет эндпоинта, пока такое решение.
+  // П.С. Заметил, что токен через короткое время становится не валидным, а API при наличии
+  // лобого токена, в т.ч. не валидного отдаёт записи всех пользователей.
   useEffect(() => {
     if (localStorage.getItem("links_app_token")) {
       dispatch(setUser());

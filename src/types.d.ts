@@ -25,14 +25,10 @@ export interface IAuthError {
   detail: string | IAuthError;
 }
 
-export interface ISortMethod {
-  short?: "asc_short" | "desc_short";
-  target?: "asc_target" | "desc_target";
-  counter?: "asc_counter" | "desc_counter";
-}
+export interface ISortMethod {}
 
 export interface ILinksOptions {
-  order?: ISortMethod;
+  order?: string[];
   offset: number;
   limit: number;
 }

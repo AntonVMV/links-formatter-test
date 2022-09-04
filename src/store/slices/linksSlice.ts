@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { AxiosError } from "axios";
 import { ILinkData, ILinksOptions } from "../../types";
 import { axiosInstance } from "../../utils/axios";
 
@@ -22,13 +23,19 @@ export const getLinks = createAsyncThunk<
   { rejectValue: string }
 >("links/getLinks", async (options, { rejectWithValue }) => {
   try {
-    const { data } = await axiosInstance.get<ILinkData[]>("/statistics", {
-      params: options,
-    });
+    const sortOptions = options.order?.map((item) => `order=${item}`).join("&");
+
+    const { data } = await axiosInstance.get<ILinkData[]>(
+      `/statistics/?limit=${options.limit}&offset=${options.offset}&${sortOptions}`
+    );
 
     return data;
   } catch (e) {
-    return rejectWithValue("S");
+    if (e instanceof AxiosError) {
+      return rejectWithValue(e.response?.data.detail);
+    } else {
+      return rejectWithValue("Unknown Error");
+    }
   }
 });
 
@@ -59,6 +66,12 @@ const linksSlice = createSlice({
           state.isMoreData = false;
         } else {
           state.isMoreData = true;
+        }
+      })
+      .addCase(getLinks.rejected, (state, action) => {
+        state.loading = false;
+        if (action.payload) {
+          state.error = action.payload;
         }
       });
   },

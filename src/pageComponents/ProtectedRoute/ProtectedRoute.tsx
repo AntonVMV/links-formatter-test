@@ -1,4 +1,4 @@
-import { ReactElement, useEffect } from "react";
+import { ReactElement } from "react";
 import { Navigate } from "react-router-dom";
 import { Loading } from "../../components/Loading/Loading";
 

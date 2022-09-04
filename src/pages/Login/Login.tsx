@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 
 import styles from "./Login.module.css";
+import { Loading } from "../../components/Loading/Loading";
 
 export const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -25,6 +26,7 @@ export const Login: React.FC = () => {
 
   return (
     <>
+      {loading && <Loading />}
       <div className={styles.login}>
         <h2 className={styles.title}>Login</h2>
         <Form submit={loginHandler} />

@@ -1,7 +1,7 @@
 .main_page {
   padding: 20px 0;
   display: grid;
-  row-gap: 20px;
+  row-gap: 30px;
 }
 
 .logout_btn {

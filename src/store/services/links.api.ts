@@ -29,7 +29,7 @@ export const linksAppApi = createApi({
       invalidatesTags: ["links"],
     }),
 
-    createUser: build.mutation<any, IForm>({
+    createUser: build.mutation<{ username: string }, IForm>({
       query: (formData) => ({
         method: "POST",
         url: "/register",

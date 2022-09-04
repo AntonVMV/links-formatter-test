@@ -11,3 +11,10 @@
 .button {
   justify-self: flex-start;
 }
+
+@media screen and (max-width: 768px) {
+  .input {
+    background-color: white;
+    max-width: 100%;
+  }
+}
